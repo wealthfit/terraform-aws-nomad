@@ -1,3 +1,12 @@
+# ----------------------------------------------------------------------------------------------------------------------
+# Set S3 Backend for remote state and specify region
+# ----------------------------------------------------------------------------------------------------------------------
+terraform {
+  backend "s3" {}
+}
+provider "aws" {
+  region = "us-west-2"
+}
 # ---------------------------------------------------------------------------------------------------------------------
 # CREATE THE SECURITY GROUP RULES THAT CONTROL WHAT TRAFFIC CAN GO IN AND OUT OF A NOMAD CLUSTER
 # ---------------------------------------------------------------------------------------------------------------------
@@ -49,4 +58,3 @@ resource "aws_security_group_rule" "allow_serf_udp_inbound" {
 
   security_group_id = var.security_group_id
 }
-

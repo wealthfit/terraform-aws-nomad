@@ -1,4 +1,14 @@
 # ----------------------------------------------------------------------------------------------------------------------
+# Set S3 Backend for remote state and specify region
+# ----------------------------------------------------------------------------------------------------------------------
+terraform {
+  backend "s3" {}
+}
+provider "aws" {
+  region = "us-west-2"
+}
+
+# ----------------------------------------------------------------------------------------------------------------------
 # REQUIRE A SPECIFIC TERRAFORM VERSION OR HIGHER
 # This module has been updated with 0.12 syntax, which means it is no longer compatible with any versions below 0.12.
 # ----------------------------------------------------------------------------------------------------------------------
@@ -31,7 +41,7 @@ resource "aws_autoscaling_group" "autoscaling_group" {
     value               = var.cluster_name
     propagate_at_launch = true
   }
-  
+
   tag {
     key                 = var.cluster_tag_key
     value               = var.cluster_tag_value
@@ -195,4 +205,3 @@ data "aws_iam_policy_document" "instance_role" {
     }
   }
 }
-
